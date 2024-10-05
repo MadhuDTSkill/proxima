@@ -1,0 +1,84 @@
+*::-webkit-scrollbar {
+  width: 5px;
+  height: 3px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  scroll-behavior: smooth;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  @apply bg-gradient-to-t from-pink-500 to-pink-300;
+}
+
+.zero {
+  letter-spacing: -1px; /* Decreases space between characters */
+}
+
+body {
+  color: rgb(150, 150, 150);
+}
+
+.font-main {
+  font-family: "Comfortaa", sans-serif;
+}
+
+.cp {
+  @apply cursor-pointer;
+}
+
+.bg-main-hover {
+  @apply bg-gradient-to-t hover:from-orange-800 hover:to-orange-300;
+}
+
+strong {
+  @apply font-bold mr-1 !important;
+}
+
+.prompt-placeholder::placeholder {
+  opacity: 0.3;
+  /* Adjust the opacity value as needed */
+}
+
+.dp::placeholder {
+  opacity: 0.3 !important;
+  /* Adjust the opacity value as needed */
+}
+
+.border-main {
+  @apply border-orange-700 !important;
+}
+
+.i {
+  @apply bg-transparent p-2 border-2 rounded-md border-main outline-none dp !important;
+}
+
+/* Hide the up and down arrows in all browsers */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  /* Firefox */
+}
+
+/* Optional: Remove the spinner from the right side in some versions of Chrome */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.bg-gradent {
+  @apply bg-gradient-to-b from-pink-500 to-pink-300 duration-300 transition;
+}
+
+.bg-gradent:hover {
+  @apply bg-gradient-to-t from-pink-500 to-pink-300 duration-300 transition !important;
+}
