@@ -36,7 +36,7 @@ const NewChat = () => {
 
   return (
     <div className='h-full flex flex-col max-w-3xl mx-auto'>
-      <div className='flex-1 overflow-y-auto'>
+      <div className='flex-1 overflow-y-auto md:p-3'>
           {
             isLoading ? (
                 <Message isLoading = {isLoading} message={{
