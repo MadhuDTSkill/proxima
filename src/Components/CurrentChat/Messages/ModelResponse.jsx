@@ -7,7 +7,6 @@ const ModelResponse = ({
   message,
   isLoading,
   isStreaming,
-  streamingElementRef
 }) => {
   return (
     <div className=''>
@@ -22,14 +21,12 @@ const ModelResponse = ({
               </div>
             </div>  
             :
-              <div>
+              <div className={isStreaming ? 'animate-pulse' : ''}>
                 <Markdown >
                     {message.response}
                 </Markdown>
               </div>
           }
-          <div id='stream' ref={streamingElementRef} className={isStreaming ? 'animate-pulse' : ''}>
-          </div>
         </div>
       </div>
     </div>

@@ -10,15 +10,16 @@ const Messages = ({
   isLoading,
   isStreaming,
   scrollCallBack,
-  streamingElementRef
 }) => {
-  const latestMessage = {
-    prompt: staticPrompt,
-  }
+
   const { ref, inView } = useInView({
     triggerOnce: false,
     threshold: 1,
   });
+
+  const latestMessageState = useSelector(
+    (state) => state.store.latestMessage
+  );
 
   return (
     <div className='relative'>
@@ -28,9 +29,8 @@ const Messages = ({
         ))}
         {isStreaming && (
           <Message
-            message={latestMessage}
+            message={latestMessageState}
             isStreaming={isStreaming}
-            streamingElementRef = {streamingElementRef}
           />
         )}
         {isLoading && (

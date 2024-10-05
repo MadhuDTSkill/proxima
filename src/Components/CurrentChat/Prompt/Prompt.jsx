@@ -1,9 +1,16 @@
-import { useEffect, useState } from 'react';
-import { FaPaperPlane } from 'react-icons/fa';
-import { WiStars } from "react-icons/wi";
+import { useEffect, useState, useRef } from 'react';
+import { FaPaperPlane, FaFileImage, FaFileAlt, FaFilePdf, FaFileWord } from 'react-icons/fa';
+import { RiAttachmentLine } from "react-icons/ri";
+import { IoMdCloseCircle } from 'react-icons/io';
+import apiCallWithToken from '../../../Functions/Axios';
+import { useParams } from 'react-router-dom';
 
 const Prompt = ({ setStaticPrompt, setPrompt, prompt, onSubmit, isLoading, isStreaming }) => {
   const [rows, setRows] = useState(1);
+  const {chat_id} = useParams()
+  const [uploadedFile, setUploadedFile] = useState(null);
+  const [isUploadingFile, setIsUploadedingFile] = useState(null);
+  const fileInputRef = useRef(null); // Create a reference for the file input
 
   const handleTextChange = (event) => {
     const textareaLineHeight = 24;
@@ -22,10 +29,37 @@ const Prompt = ({ setStaticPrompt, setPrompt, prompt, onSubmit, isLoading, isStr
     setStaticPrompt(event.target.value);
   };
 
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    
+    // Check if a file is uploaded
+    if (file) {
+        // Define the allowed file types
+        const allowedTypes = ['application/pdf', 'text/plain'];
+        
+        // Check if the uploaded file type is allowed
+        if (allowedTypes.includes(file.type)) {
+            setUploadedFile(file); // Update the state with the uploaded file
+        } else {
+            console.log("Unsupported file type. Please upload a PDF, TXT, DOC, or DOCX file."); // Log the unsupported file type
+            // Optionally, you can show a message to the user here
+        }
+    }
+};
+
+
+  const removeFile = () => {
+    setUploadedFile(null); // Remove the uploaded file
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ''; // Reset the file input
+    }
+  };
+
   const goForSubmit = () => {
     if (prompt?.trim() !== '' && !isLoading) {
       setRows(1);
       onSubmit();
+      setUploadedFile(null); // Reset the uploaded file
     }
   };
 
@@ -38,11 +72,62 @@ const Prompt = ({ setStaticPrompt, setPrompt, prompt, onSubmit, isLoading, isStr
   };
 
   useEffect(() => {
-    const ele = document.getElementById('input-box')
+    const ele = document.getElementById('input-box');
     if (ele) {
       ele.focus();
     }
   }, []);
+
+  const renderFilePreview = () => {
+    if (!uploadedFile) return null;
+
+    const fileType = uploadedFile.type;
+
+    return (
+      <div className="flex items-center mb-4 p-3 bg-main/10 rounded-lg shadow-md">
+        {fileType.startsWith('image/') && <FaFileImage className="text-main mr-2" size={24} />}
+        {fileType === 'application/pdf' && <FaFilePdf className="text-main mr-2" size={24} />}
+        {(fileType === 'application/msword' || fileType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') && (
+          <FaFileWord className="text-main mr-2" size={24} />
+        )}
+        {!fileType.startsWith('image/') && fileType !== 'application/pdf' && fileType !== 'application/msword' && fileType !== 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' && (
+          <FaFileAlt className="text-main mr-2" size={24} />
+        )}
+
+        <span className={`${isUploadingFile ? 'animate-pulse' : ''} text-main text-sm`}>{uploadedFile.name}</span>
+
+        {/* Cross button to discard the uploaded file */}
+        <IoMdCloseCircle
+          className="ml-2 text-gray-500 cursor-pointer"
+          size={22}
+          onClick={removeFile}
+        />
+      </div>
+    );
+  };
+
+  const handleFileUpload = () =>{
+    let formData = new FormData();
+    formData.append('file', uploadedFile);
+    let url = `chat/${chat_id}/upload-file/`
+    let body = formData;
+    let method = 'post';
+    let loadingState = setIsUploadedingFile
+    const onSuccess = (res) => {
+      console.log(res)
+    }
+    const onError = (err) => {
+      console.log(err)
+    }
+    apiCallWithToken(url, body, method, loadingState, onSuccess, onError)
+  }
+
+  useEffect(() => {
+    if (uploadedFile) {
+      handleFileUpload();
+    }
+  }, [uploadedFile])
+  
 
   return (
     <div className="relative pb-1.5">
@@ -52,12 +137,28 @@ const Prompt = ({ setStaticPrompt, setPrompt, prompt, onSubmit, isLoading, isStr
           goForSubmit();
         }}
       >
+        {/* Render file preview or icon above the text area */}
+        {renderFilePreview()}
+
         <div className="relative flex items-center">
           {/* Left Icon */}
-          <WiStars className="absolute left-3 text-main" size={30} />
+          {
+            chat_id &&
+            <label htmlFor="attachment" className="absolute left-3 cp">
+              <RiAttachmentLine className="text-main" size={25} />
+            </label>
+          }
+          <input
+            type="file"
+            id="attachment"
+            className="hidden"
+            accept=".pdf, .txt"
+            onChange={handleFileChange}
+            ref={fileInputRef} // Add ref to the file input
+          />
 
           <textarea
-            id='input-box'
+            id="input-box"
             value={prompt}
             onChange={handleTextChange}
             onKeyDown={handleKeyDown}
@@ -72,13 +173,13 @@ const Prompt = ({ setStaticPrompt, setPrompt, prompt, onSubmit, isLoading, isStr
           <button
             type="submit"
             className="absolute right-0 bg-main rounded-full p-2.5 m-1 text-white"
-            disabled={prompt?.trim() === '' || isLoading}
+            disabled={prompt?.trim() === '' || isLoading || isUploadingFile || isStreaming}
           >
-            <FaPaperPlane className='text-white' size={20} />
+            <FaPaperPlane className="text-white" size={20} />
           </button>
         </div>
       </form>
-      <div className='pb-2'>
+      <div className="pb-2">
         {/* <Footer /> */}
       </div>
     </div>

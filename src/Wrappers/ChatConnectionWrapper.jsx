@@ -3,8 +3,7 @@ import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { getData } from '../Functions/localStorage'
 import apiCallWithToken from '../Functions/Axios';
-import {createRoot} from 'react-dom/client'
-import Markdown from 'react-markdown'
+import { addNewMessage, addNewMessageChunk } from '../redux/Slice';
 
 
 const token = getData('accessToken')
@@ -19,9 +18,8 @@ const ChatConnectionWrapper = (WrappedComponent) => {
         const [isMessagesLoading, setIsMessagesLoading] = useState(true);
         const [isMessageCreateLoading, setIsMessageCreateLoading] = useState(false);
         const [isStreaming, setIsStreaming] = useState(false);
-        const streamingElementRef = useRef(null)
-        const rootRef = useRef(null)
         const [messages, setMessages] = useState([]);
+
 
         const sendPrompt = (prompt) => {
             if (ws.current && ws.current.readyState === WebSocket.OPEN) {
@@ -77,16 +75,16 @@ const ChatConnectionWrapper = (WrappedComponent) => {
                 if (data.response === '<start>') {
                     setIsStreaming(true)
                     setIsLoading(false)
+                    dispatch(addNewMessage({
+                        ...data,
+                        response: ''
+                    }))
                 }
                 else if (data.response === '<end>') {
                     addMessage(data?.prompt, data?.full_response)
                 }
                 else {
-                    // if (streamingElementRef.current) {
-                    //     createRoot(streamingElementRef.current).render(
-                    //         <Markdown>{data.response}</Markdown>
-                    //     )
-                    // }
+                    dispatch(addNewMessageChunk(data.response))
                 };
             }
 
@@ -121,7 +119,6 @@ const ChatConnectionWrapper = (WrappedComponent) => {
                 isStreaming={isStreaming}
                 sendPrompt={sendPrompt}
                 messages = {messages}
-                streamingElementRef = {streamingElementRef}
             />
         )
     }

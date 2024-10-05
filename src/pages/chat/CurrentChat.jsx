@@ -4,6 +4,7 @@ import Messages from "../../Components/CurrentChat/Messages/Messages";
 import Prompt from "../../Components/CurrentChat/Prompt/Prompt";
 import { useLocation } from "react-router-dom";
 import { PiSpinnerGap } from "react-icons/pi";
+import { useInView } from 'react-intersection-observer';
 
 const CurrentChat = ({
   isConnected,
@@ -13,14 +14,14 @@ const CurrentChat = ({
   isStreaming,
   sendPrompt,
   messages,
-  streamingElementRef
 }) => {
   const location = useLocation();
   const [prompt, setPrompt] = useState("");
   const [staticPrompt, setStaticPrompt] = useState("");
-  const scrollIntervalRef = useRef(null);
   const messageContainerRef = useRef(null); // Ref for the message container
 
+
+  
   const scrollToBottom = () => {
     const ele = document.getElementById("message-bottom");
     if (ele) {
@@ -28,24 +29,6 @@ const CurrentChat = ({
     }
   };
 
-  useEffect(() => {
-    if (isStreaming) {
-      scrollIntervalRef.current = setInterval(() => {
-        scrollToBottom(); 
-      }, 200);
-    } else {
-      if (scrollIntervalRef.current) {
-        clearInterval(scrollIntervalRef.current);
-        scrollIntervalRef.current = null;
-      }
-      scrollToBottom();
-    }
-    return () => {
-      if (scrollIntervalRef.current) {
-        clearInterval(scrollIntervalRef.current);
-      }
-    };
-  }, [isStreaming, streamingElementRef.current]);
 
   // Scroll to bottom when messages load or change
   useEffect(() => {
@@ -82,7 +65,6 @@ const CurrentChat = ({
             isLoading={isLoading}
             isStreaming={isStreaming}
             scrollCallBack = {scrollToBottom}
-            streamingElementRef = {streamingElementRef}
           />
         )}
       </div>

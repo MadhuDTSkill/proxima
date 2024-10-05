@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { FiSettings, FiLogOut, FiChevronDown } from 'react-icons/fi';
+import { FiSettings, FiLogOut } from 'react-icons/fi';
 
 const ProfileMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,6 +18,18 @@ const ProfileMenu = () => {
     };
   }, []);
 
+  const handleLogout = () => {
+    // Clear all local storage
+    localStorage.clear();
+    // Redirect to the sign-in page
+    window.location.href = '/signin'; // Use your actual login route here
+  };
+
+  const handleSettingsRedirect = () => {
+    // Redirect to settings page
+    window.location.href = '/settings'; // Use your actual settings route here
+  };
+
   return (
     <div className="relative" ref={menuRef}>
       {/* Profile Icon (Trigger) */}
@@ -35,10 +47,7 @@ const ProfileMenu = () => {
             {/* Settings Option */}
             <li
               className="flex items-center p-2 rounded-lg hover:bg-gray-100 cursor-pointer"
-              onClick={() => {
-                console.log('Navigate to settings');
-                setIsOpen(false); // Close menu on click
-              }}
+              onClick={handleSettingsRedirect} // Redirect to settings
             >
               <FiSettings className="mr-2" />
               <span>Settings</span>
@@ -47,10 +56,7 @@ const ProfileMenu = () => {
             {/* Logout Option */}
             <li
               className="flex items-center p-2 rounded-lg hover:bg-gray-100 cursor-pointer"
-              onClick={() => {
-                console.log('Logout');
-                setIsOpen(false); // Close menu on click
-              }}
+              onClick={handleLogout} // Logout and redirect
             >
               <FiLogOut className="mr-2" />
               <span>Logout</span>

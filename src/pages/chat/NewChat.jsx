@@ -4,6 +4,7 @@ import Prompt from '../../Components/CurrentChat/Prompt/Prompt'
 import apiCallWithToken from '../../Functions/Axios';
 import { useNavigate } from 'react-router-dom';
 import Message from '../../Components/CurrentChat/Messages/Message';
+import { setData } from '../../Functions/localStorage';
 
 
 const NewChat = () => {
@@ -26,6 +27,7 @@ const NewChat = () => {
       let loadingState = setIsLoading
       const onSuccess = (data) => {
         setPrompt('')
+        setData('newChat', data.id)
         handleNavigate(data.id, {prompt})
       }
       const onError = (error) => {

@@ -1,6 +1,9 @@
 import React from 'react'
 import { MdDelete } from 'react-icons/md'
 import { useNavigate, useParams } from 'react-router-dom'
+import { ReactTyped } from 'react-typed';
+import { getData } from '../../../Functions/localStorage';
+
 
 const ChatItem = ({ chat }) => {
   const nav = useNavigate()
@@ -11,8 +14,17 @@ const ChatItem = ({ chat }) => {
     return nav(`/c/${chat.id}`)
   }
 
+  const getNewChatTemp = () => {
+    return getData('newChat')
+  }
+
+  const clearNewChatTemp = () => {
+    localStorage.removeItem('newChat')
+  }
+
   // Check if the chat is active
   const isActive = chat_id === chat.id
+  const isNewChat = chat.id === getNewChatTemp()
 
   return (
     <div
@@ -21,7 +33,20 @@ const ChatItem = ({ chat }) => {
       }`} 
       onClick={handleNavigate}
     >
-      <span className='truncate text-black font-thin'>{chat.name || 'New Chat'}</span>
+      <span className='truncate text-black font-thin'>
+        {
+          isNewChat ?
+          <ReactTyped
+            strings={[chat.name || 'New Chat']}
+            typeSpeed={50}
+            loop = {false}
+            showCursor={false}
+            onComplete={clearNewChatTemp}
+          />
+          :
+          chat.name || 'New Chat'
+        }
+      </span>
       <div className='group-hover:visible invisible'>
         <MdDelete className='text-xl text-gray-500' />
       </div>
