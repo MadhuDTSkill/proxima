@@ -12,7 +12,7 @@ const Message = ({
   showMenu
 }) => {
   return (
-    <div className='group'>
+    <div>
       <UserMessage message={message} />
       <ModelResponse 
         streamingElementRef = {streamingElementRef} 
@@ -24,7 +24,7 @@ const Message = ({
       <div className='h-10 max-w-3xl mx-auto py-2'>
         {
           showMenu && (
-          <div className='group-hover:opacity-100 opacity-0 duration-300 transition'>
+          <div className='duration-300 transition'>
             <MessageMenu message={message.response} />
           </div>
           )

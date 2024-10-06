@@ -2,6 +2,8 @@ import { useEffect, useState, useRef } from 'react';
 import { FaPaperPlane, FaFileImage, FaFileAlt, FaFilePdf, FaFileWord } from 'react-icons/fa';
 import { RiAttachmentLine } from "react-icons/ri";
 import { IoMdCloseCircle } from 'react-icons/io';
+import { CiMicrophoneOn } from "react-icons/ci";
+import { IoStopCircleOutline } from "react-icons/io5";
 import Footer from '../../AppLayout/Footer';
 import apiCallWithToken from '../../../Functions/Axios';
 import { useParams } from 'react-router-dom';
