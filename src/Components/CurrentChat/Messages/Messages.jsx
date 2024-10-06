@@ -10,6 +10,7 @@ const Messages = ({
   isLoading,
   isStreaming,
   scrollCallBack,
+  waitingMessage
 }) => {
 
   const { ref, inView } = useInView({
@@ -37,6 +38,7 @@ const Messages = ({
           <Message
             key='loading-message'
             isLoading={isLoading}
+            waitingMessage = {waitingMessage}
             message={{
               id: 'loading',
               prompt: staticPrompt,

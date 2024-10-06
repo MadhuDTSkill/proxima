@@ -1,12 +1,12 @@
 import React from 'react'
 import Title from '../../../Title'
 import Markdown from 'react-markdown'
-import { PiSpinnerGap } from "react-icons/pi";
 
 const ModelResponse = ({
   message,
   isLoading,
   isStreaming,
+  waitingMessage
 }) => {
   return (
     <div className=''>
@@ -16,8 +16,17 @@ const ModelResponse = ({
           {
             isLoading ?
             <div className='text-black max-w-3xl mx-auto'>
-              <div className='animate-pulse dflex justify-center items-center text-main'>
-                <PiSpinnerGap size={30} className='text-center text-main animate-spin'/>
+              <div className='animate-pulse language-javascript dflex justify-center items-center text-main'>
+                {
+                  waitingMessage.split("").map((char, index) => (
+                    <span 
+                        key={index}
+                        className="twinkle"
+                        style={{ animationDelay: `${index * 0.1}s` }} 
+                    >
+                        {char}
+                    </span>
+                ))}
               </div>
             </div>  
             :

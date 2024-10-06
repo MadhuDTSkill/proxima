@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { FaPaperPlane, FaFileImage, FaFileAlt, FaFilePdf, FaFileWord } from 'react-icons/fa';
 import { RiAttachmentLine } from "react-icons/ri";
 import { IoMdCloseCircle } from 'react-icons/io';
+import Footer from '../../AppLayout/Footer';
 import apiCallWithToken from '../../../Functions/Axios';
 import { useParams } from 'react-router-dom';
 
@@ -130,7 +131,7 @@ const Prompt = ({ setStaticPrompt, setPrompt, prompt, onSubmit, isLoading, isStr
   
 
   return (
-    <div className="relative pb-1.5">
+    <div className="relative">
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -179,8 +180,8 @@ const Prompt = ({ setStaticPrompt, setPrompt, prompt, onSubmit, isLoading, isStr
           </button>
         </div>
       </form>
-      <div className="pb-2">
-        {/* <Footer /> */}
+      <div className="">
+        <Footer />
       </div>
     </div>
   );

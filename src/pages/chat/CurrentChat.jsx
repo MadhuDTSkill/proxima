@@ -14,6 +14,7 @@ const CurrentChat = ({
   isStreaming,
   sendPrompt,
   messages,
+  waitingMessage
 }) => {
   const location = useLocation();
   const [prompt, setPrompt] = useState("");
@@ -65,6 +66,7 @@ const CurrentChat = ({
             isLoading={isLoading}
             isStreaming={isStreaming}
             scrollCallBack = {scrollToBottom}
+            waitingMessage = {waitingMessage}
           />
         )}
       </div>

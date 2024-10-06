@@ -15,6 +15,7 @@ const ChatConnectionWrapper = (WrappedComponent) => {
         const dispatch = useDispatch()
         const [isConnected, setIsConnected] = useState(false);
         const [isLoading, setIsLoading] = useState(false);
+        const [waitingMessage, setWaitingMessage] = useState('Loading...');
         const [isMessagesLoading, setIsMessagesLoading] = useState(true);
         const [isMessageCreateLoading, setIsMessageCreateLoading] = useState(false);
         const [isStreaming, setIsStreaming] = useState(false);
@@ -72,24 +73,33 @@ const ChatConnectionWrapper = (WrappedComponent) => {
 
             ws.current.onmessage = (event) => {
                 const data = JSON.parse(event.data);
-                if (data.response === '<start>') {
-                    setIsStreaming(true)
-                    setIsLoading(false)
-                    dispatch(addNewMessage({
-                        ...data,
-                        response: ''
-                    }))
+                if (data.type === 'source_status'){
+                    setWaitingMessage(data.source)
                 }
-                else if (data.response === '<end>') {
-                    addMessage(data?.prompt, data?.full_response)
+                else{
+                    if (data.response === '<start>') {
+                        setIsStreaming(true)
+                        setIsLoading(false)
+                        setWaitingMessage('Loading...')
+                        dispatch(addNewMessage({
+                            ...data,
+                            response: ''
+                        }))
+                    }
+                    else if (data.response === '<end>') {
+                        addMessage(data?.prompt, data?.full_response)
+                    }
+                    else {
+                        dispatch(addNewMessageChunk(data.response))
+                    };
                 }
-                else {
-                    dispatch(addNewMessageChunk(data.response))
-                };
             }
 
             ws.current.onerror = (event) => {
                 console.error("WebSocket error observed:", event);
+                setIsConnected(false);
+                setIsMessagesLoading(true)
+
             };
 
             ws.current.onclose = (event) => {
@@ -119,6 +129,7 @@ const ChatConnectionWrapper = (WrappedComponent) => {
                 isStreaming={isStreaming}
                 sendPrompt={sendPrompt}
                 messages = {messages}
+                waitingMessage = {waitingMessage}
             />
         )
     }
