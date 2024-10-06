@@ -112,7 +112,7 @@ pre {
   margin-bottom: 20px !important;
   margin-top: 20px !important;
   background-color: #1e1e1e; /* Darker background for block code */
-  color: #ffffff; /* White text */
+  color: rgba(255, 255, 255, 0.7); /* White text */
   padding: 3em; /* Padding around the code block */
   max-width: 100%; /* Set maximum width */
   overflow-x: auto; /* Allow horizontal scrolling only */
@@ -123,6 +123,6 @@ pre {
   box-shadow: 2px 2px 5px 2px black; /* Box shadow for a subtle depth */
 }
 
-/* p code {
-  background-color: black;
-} */
+strong {
+  @apply text-main !important;
+}

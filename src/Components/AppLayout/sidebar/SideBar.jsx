@@ -16,7 +16,7 @@ const SideBar = ({
           } md:translate-x-0 md:static`}
       >
         <div className="flex flex-col h-full p-1">
-          <Header/>
+          <Header setIsDrawerOpen ={setIsDrawerOpen}/>
           <Main/>
           <Footer/>
         </div>

@@ -10,7 +10,6 @@ const CurrentChat = ({
   isConnected,
   isLoading,
   isMessagesLoading,
-  isMessageCreateLoading,
   isStreaming,
   sendPrompt,
   messages,

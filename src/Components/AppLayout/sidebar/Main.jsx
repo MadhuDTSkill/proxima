@@ -24,6 +24,20 @@ const Main = () => {
     apiCallWithToken(url, body, method, loadingState, onSuccess, onError)
   }
 
+  const deleteChat = (chat_id) => {
+    let url = `chat/${chat_id}/`
+    let body = {}
+    let method = 'delete'
+    let loadingState = setIsLoading
+    const onSuccess = (data) => {
+      getChats()
+    }
+    const onError = (error) => {
+      console.log(error)
+    }
+    apiCallWithToken(url, body, method, loadingState, onSuccess, onError)
+  }
+
 
 
   useEffect(()=>{
@@ -46,7 +60,7 @@ const Main = () => {
                 <h2 className='text-xs text-black font-bold mb-1'>{period}</h2>
                 <div className='flex flex-col'>
                   {chats[period].map((chat, index) => (
-                    <ChatItem key={index} chat={chat} />
+                    <ChatItem key={index} chat={chat} onDelete={deleteChat} />
                   ))}
                 </div>
               </>

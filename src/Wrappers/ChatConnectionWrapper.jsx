@@ -55,6 +55,7 @@ const ChatConnectionWrapper = (WrappedComponent) => {
             const onSuccess = (data) => {
                 setMessages(messages => ([...messages, data]))
                 setIsStreaming(false)
+                setWaitingMessage('Loading...')
             }
             const onError = (error) => {
                 console.log(error)
@@ -74,13 +75,13 @@ const ChatConnectionWrapper = (WrappedComponent) => {
             ws.current.onmessage = (event) => {
                 const data = JSON.parse(event.data);
                 if (data.type === 'source_status'){
+                    console.log(data.source)
                     setWaitingMessage(data.source)
                 }
                 else{
                     if (data.response === '<start>') {
                         setIsStreaming(true)
                         setIsLoading(false)
-                        setWaitingMessage('Loading...')
                         dispatch(addNewMessage({
                             ...data,
                             response: ''
@@ -104,6 +105,8 @@ const ChatConnectionWrapper = (WrappedComponent) => {
 
             ws.current.onclose = (event) => {
                 console.log(`WebSocket is closed now`);
+                setIsConnected(false);
+                setIsMessagesLoading(true)
             };
         };
 

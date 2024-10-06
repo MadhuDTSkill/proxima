@@ -26,7 +26,7 @@ const Messages = ({
     <div className='relative'>
       <div className='flex flex-col gap-2 w-full'>
         {messages.map((message) => (
-          <Message key={message.id} message={message} />
+          <Message key={message.id} message={message} showMenu />
         ))}
         {isStreaming && (
           <Message

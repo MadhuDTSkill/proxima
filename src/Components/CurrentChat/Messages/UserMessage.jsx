@@ -5,7 +5,7 @@ const UserMessage = ({
 }) => {
   return (
     <div className='max-w-3xl mx-auto'>
-      <h1 className='font-semibold text-main my-2'>You</h1>
+      <h1 className='font-semibold text-main text-lg my-2'>You</h1>
       <p className='text-black max-w-full overflow-y-auto'>
         {message.prompt}
       </p>
