@@ -4,7 +4,6 @@ import Messages from "../../Components/CurrentChat/Messages/Messages";
 import Prompt from "../../Components/CurrentChat/Prompt/Prompt";
 import { useLocation } from "react-router-dom";
 import { PiSpinnerGap } from "react-icons/pi";
-import { useInView } from 'react-intersection-observer';
 
 const CurrentChat = ({
   isConnected,

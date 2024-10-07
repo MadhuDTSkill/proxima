@@ -3,7 +3,7 @@ import axios from "axios";
 import { getData } from "../Functions/localStorage";
 
 const instanceWithToken = axios.create({
-  baseURL: "http://localhost:8000/api/",
+  baseURL: "http://localhost:1234/api/",
   timeout: 60000,
   headers: {
     Authorization: `Bearer ${getData("accessToken")}`,
@@ -11,7 +11,7 @@ const instanceWithToken = axios.create({
 });
 
 const instance = axios.create({
-  baseURL: "http://localhost:8000/api/",
+  baseURL: "http://localhost:1234/api/",
   timeout: 60000,
 });
 

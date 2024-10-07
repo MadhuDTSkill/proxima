@@ -64,7 +64,7 @@ const ChatConnectionWrapper = (WrappedComponent) => {
         };
 
         const setupWebSocket = () => {
-            ws.current = ws.current || new WebSocket(`ws://127.0.0.1:8000/ws/chat/${chat_id}?token=${token}`);
+            ws.current = ws.current || new WebSocket(`ws://127.0.0.1:1234/ws/chat/${chat_id}?token=${token}`);
 
             ws.current.onopen = () => {
                 console.log("WebSocket connected!");
@@ -75,7 +75,6 @@ const ChatConnectionWrapper = (WrappedComponent) => {
             ws.current.onmessage = (event) => {
                 const data = JSON.parse(event.data);
                 if (data.type === 'source_status'){
-                    console.log(data.source)
                     setWaitingMessage(data.source)
                 }
                 else{

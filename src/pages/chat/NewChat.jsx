@@ -18,17 +18,18 @@ const NewChat = () => {
       return nav(`/c/${id}`, {state})
     }
 
-    const createNewChat = () => {
+    const createNewChat = (tempPrompt = null) => {
       let url = 'chat/'
       let body = {
-        first_prompt : prompt
+        first_prompt : tempPrompt || prompt
       }
+      tempPrompt && setPrompt(tempPrompt)
       let method = 'post'
       let loadingState = setIsLoading
       const onSuccess = (data) => {
         setPrompt('')
         setData('newChat', data.id)
-        handleNavigate(data.id, {prompt})
+        handleNavigate(data.id, {prompt : tempPrompt || prompt})
       }
       const onError = (error) => {
         console.log(error)
