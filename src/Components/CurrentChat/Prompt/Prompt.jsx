@@ -10,7 +10,7 @@ import { useParams } from 'react-router-dom';
 
 const Prompt = ({ setStaticPrompt, setPrompt, prompt, onSubmit, isLoading, isStreaming }) => {
   const [rows, setRows] = useState(1);
-  const {chat_id} = useParams()
+  const { chat_id } = useParams()
   const [uploadedFile, setUploadedFile] = useState(null);
   const [isUploadingFile, setIsUploadedingFile] = useState(null);
   const fileInputRef = useRef(null); // Create a reference for the file input
@@ -34,21 +34,21 @@ const Prompt = ({ setStaticPrompt, setPrompt, prompt, onSubmit, isLoading, isStr
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    
+
     // Check if a file is uploaded
     if (file) {
-        // Define the allowed file types
-        const allowedTypes = ['application/pdf', 'text/plain'];
-        
-        // Check if the uploaded file type is allowed
-        if (allowedTypes.includes(file.type)) {
-            setUploadedFile(file); // Update the state with the uploaded file
-        } else {
-            console.log("Unsupported file type. Please upload a PDF, TXT, DOC, or DOCX file."); // Log the unsupported file type
-            // Optionally, you can show a message to the user here
-        }
+      // Define the allowed file types
+      const allowedTypes = ['application/pdf', 'text/plain'];
+
+      // Check if the uploaded file type is allowed
+      if (allowedTypes.includes(file.type)) {
+        setUploadedFile(file); // Update the state with the uploaded file
+      } else {
+        console.log("Unsupported file type. Please upload a PDF, TXT, DOC, or DOCX file."); // Log the unsupported file type
+        // Optionally, you can show a message to the user here
+      }
     }
-};
+  };
 
 
   const removeFile = () => {
@@ -109,7 +109,7 @@ const Prompt = ({ setStaticPrompt, setPrompt, prompt, onSubmit, isLoading, isStr
     );
   };
 
-  const handleFileUpload = () =>{
+  const handleFileUpload = () => {
     let formData = new FormData();
     formData.append('file', uploadedFile);
     let url = `chat/${chat_id}/upload-file/`
@@ -130,7 +130,7 @@ const Prompt = ({ setStaticPrompt, setPrompt, prompt, onSubmit, isLoading, isStr
       handleFileUpload();
     }
   }, [uploadedFile])
-  
+
 
   return (
     <div className="relative">
@@ -168,7 +168,7 @@ const Prompt = ({ setStaticPrompt, setPrompt, prompt, onSubmit, isLoading, isStr
             rows={rows}
             placeholder="Message to Proxima..."
             maxLength={8000}
-            className={`pl-12 pr-12 ${rows > 2 ? 'rounded-2xl' : 'rounded-full' }  shadow-md shadow-gray-400 p-3 border-t w-full bg-transparent outline-none`}
+            className={`pl-12 pr-12 ${rows > 2 ? 'rounded-2xl' : 'rounded-full'}  shadow-md shadow-gray-400 dark:shadow-main dark:border-main p-3 border-t w-full bg-transparent outline-none`}
             style={{ resize: 'none', overflow: 'hidden' }}
           />
 

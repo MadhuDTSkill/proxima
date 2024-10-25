@@ -12,10 +12,18 @@ import SignIn from './pages/auth/SignIn';
 import AppLayout from './layouts/AppLayout';
 import NotFound from './pages/extra/NotFound';
 import RootLayout from './layouts/RootLayout';
+import CustomGPTs from './pages/chat/CustomGPTs';
+import CustomMlModels from './pages/chat/CustomMlModels';
+import SimpleLayout from './layouts/SimpleLayout';
+import DarkModeToggle from './DarkModeToggle';
 
 export default function App() {
+
   return (
     <Provider store={Store}>
+      <div className='hidden'>
+        <DarkModeToggle />
+      </div>
       <RouterProvider router={router} />
     </Provider>
   )
@@ -38,9 +46,23 @@ const router = createBrowserRouter([
     ]
   },
   {
-    path : '/',
-    Component : UnAuthWrapper(RootLayout),
-    children : [
+    path: '/',
+    Component: AuthWrapper(SimpleLayout),
+    children: [
+      {
+        path: 'my-gpts',
+        Component: CustomGPTs
+      },
+      {
+        path: 'ml-dl-models',
+        Component: CustomMlModels
+      },
+    ]
+  },
+  {
+    path: '/',
+    Component: UnAuthWrapper(RootLayout),
+    children: [
       {
         path: '/signup',
         Component: SignUp
@@ -51,12 +73,12 @@ const router = createBrowserRouter([
       },
       {
         path: '/test',
-        Component : Test
+        Component: Test
       },
-      {
-        path: '*',
-        Component: NotFound
-      }
     ]
+  },
+  {
+    path: '*',
+    Component: NotFound
   }
 ])

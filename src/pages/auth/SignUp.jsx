@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {ReactTyped} from 'react-typed';
+import { ReactTyped } from 'react-typed';
 import Title from '../../Title'
 import { apiCall } from '../../Functions/Axios';
 import { setData } from '../../Functions/localStorage';
@@ -49,8 +49,8 @@ const Signup = () => {
   return (
     <div className="min-h-screen flex">
       {/* Left Side with Welcome Content */}
-      <div className="hidden md:flex w-1/2 flex-col justify-center items-center bg-gray-100 p-8">
-        <h1 className="text-4xl font-bold text-main mb-4">Welcome to <Title/></h1>
+      <div className="hidden md:flex w-1/2 flex-col justify-center items-center bg-gray-100 p-8 dark:bg-slate-950">
+        <h1 className="text-4xl font-bold text-main mb-4">Welcome to <Title /></h1>
         <ReactTyped
           strings={[
             'Engage with cutting-edge AI models.',
@@ -68,7 +68,7 @@ const Signup = () => {
       </div>
 
       {/* Right Side with Sign-up Form */}
-      <div className="w-full md:w-1/2 flex justify-center items-center p-8">
+      <div className="w-full md:w-1/2 flex justify-center items-center p-8 dark:bg-slate-900">
         <div className="w-full max-w-md">
           <h2 className="text-3xl font-semibold text-center text-main mb-6">Sign Up</h2>
 
@@ -83,7 +83,7 @@ const Signup = () => {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-main"
+                className="w-full px-4 py-2 mt-2 border border-gray-300 dark:bg-slate-900  rounded-lg focus:outline-none focus:ring-2 focus:ring-main"
                 placeholder="Enter your name"
               />
             </div>
@@ -97,7 +97,7 @@ const Signup = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-main"
+                className="w-full px-4 py-2 mt-2 border border-gray-300 dark:bg-slate-900  rounded-lg focus:outline-none focus:ring-2 focus:ring-main"
                 placeholder="Enter your email"
               />
             </div>
@@ -111,7 +111,7 @@ const Signup = () => {
                 value={formData.password}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-main"
+                className="w-full px-4 py-2 mt-2 border border-gray-300 dark:bg-slate-900  rounded-lg focus:outline-none focus:ring-2 focus:ring-main"
                 placeholder="Enter your password"
               />
             </div>
@@ -125,7 +125,7 @@ const Signup = () => {
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-main"
+                className="w-full px-4 py-2 mt-2 border border-gray-300 dark:bg-slate-900  rounded-lg focus:outline-none focus:ring-2 focus:ring-main"
                 placeholder="Confirm your password"
               />
             </div>
@@ -149,8 +149,8 @@ const Signup = () => {
 
           {/* Already have an account */}
           <div className="text-center">
-            <p className="text-sm text-gray-600">
-              Already have an account? 
+            <p className="text-sm text-gray-600 dark:text-white">
+              Already have an account?
               <a href="/signin" className="text-main font-bold hover:underline ml-1">Sign In</a>
             </p>
           </div>

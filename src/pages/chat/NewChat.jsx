@@ -9,56 +9,56 @@ import { setData } from '../../Functions/localStorage';
 
 const NewChat = () => {
 
-    const nav = useNavigate()
-    const [prompt, setPrompt] = useState('');
-    const [_, setStaticPrompt] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
+  const nav = useNavigate()
+  const [prompt, setPrompt] = useState('');
+  const [_, setStaticPrompt] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-    const handleNavigate = (id, state) => {
-      return nav(`/c/${id}`, {state})
-    }
+  const handleNavigate = (id, state) => {
+    return nav(`/c/${id}`, { state })
+  }
 
-    const createNewChat = (tempPrompt = null) => {
-      let url = 'chat/'
-      let body = {
-        first_prompt : tempPrompt || prompt
-      }
-      tempPrompt && setPrompt(tempPrompt)
-      let method = 'post'
-      let loadingState = setIsLoading
-      const onSuccess = (data) => {
-        setPrompt('')
-        setData('newChat', data.id)
-        handleNavigate(data.id, {prompt : tempPrompt || prompt})
-      }
-      const onError = (error) => {
-        console.log(error)
-      }
-      apiCallWithToken(url, body, method, loadingState, onSuccess, onError)
+  const createNewChat = (tempPrompt = null) => {
+    setPrompt('')
+    let url = 'chat/'
+    let body = {
+      first_prompt: tempPrompt || prompt
     }
+    tempPrompt && setPrompt(tempPrompt)
+    let method = 'post'
+    let loadingState = setIsLoading
+    const onSuccess = (data) => {
+      setData('newChat', data.id)
+      handleNavigate(data.id, { prompt: tempPrompt || prompt })
+    }
+    const onError = (error) => {
+      console.log(error)
+    }
+    apiCallWithToken(url, body, method, loadingState, onSuccess, onError)
+  }
 
   return (
     <div className='h-full flex flex-col max-w-3xl mx-auto'>
       <div className='flex-1 overflow-y-auto md:p-3'>
-          {
-            isLoading ? (
-                <Message isLoading = {isLoading} message={{
-                  id: 1,
-                  prompt: prompt,
-                  user: "Madhu",
-                }} />
-            ) : (
-              <Intro handlePromptClick={createNewChat} />
-            )
-          }
+        {
+          isLoading ? (
+            <Message isLoading={isLoading} message={{
+              id: 1,
+              prompt: _,
+              user: "Madhu",
+            }} />
+          ) : (
+            <Intro handlePromptClick={createNewChat} />
+          )
+        }
       </div>
       <div>
-          <Prompt
-           isLoading = {isLoading}
-           prompt = {prompt}
-           setPrompt = {setPrompt} 
-           setStaticPrompt = {setStaticPrompt} 
-           onSubmit={createNewChat} />
+        <Prompt
+          isLoading={isLoading}
+          prompt={prompt}
+          setPrompt={setPrompt}
+          setStaticPrompt={setStaticPrompt}
+          onSubmit={createNewChat} />
       </div>
 
     </div>

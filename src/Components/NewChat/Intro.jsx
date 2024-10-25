@@ -13,29 +13,29 @@ const Intro = ({ handlePromptClick }) => {
 
   return (
     <div className="h-full flex items-center justify-center px-4 text-center">
-        <div>
-            {/* Website title */}
-            <h1 className="text-5xl font-bold text-main mb-6"><Title /></h1>
+      <div>
+        {/* Website title */}
+        <h1 className="text-5xl font-bold text-main mb-6"><Title /></h1>
 
-            {/* Introductory text */}
-            <p className="text-xs text-gray-700 mb-8">
-                Welcome to <Title flag />! Here, you can chat with cutting-edge LLM models. Feel free to ask any question—from everyday curiosities to complex scientific inquiries—and get insightful responses in real-time. Start your conversation now or try one of the prompts below to explore interesting topics.
-            </p>
+        {/* Introductory text */}
+        <p className="text-xs text-gray-700 dark:text-white mb-8">
+          Welcome to <Title flag />! Here, you can chat with cutting-edge LLM models. Feel free to ask any question—from everyday curiosities to complex scientific inquiries—and get insightful responses in real-time. Start your conversation now or try one of the prompts below to explore interesting topics.
+        </p>
 
-            {/* Grid of default prompts */}
-            <div className="grid grid-cols-2 gap-6">
-                {defaultPrompts.map((prompt, index) => (
-                <button
-                    key={index}
-                    onClick={() => handlePromptClick(prompt.text)}
-                    className="text-main font-semibold text-lg bg-main bg-opacity-5 hover:bg-opacity-10 p-4 rounded-lg transition duration-200 ease-in-out shadow-md flex items-center justify-center space-x-3"
-                >
-                    {prompt.icon}
-                    <span>{prompt.text}</span>
-                </button>
-                ))}
-            </div>
+        {/* Grid of default prompts */}
+        <div className="grid grid-cols-2 gap-6">
+          {defaultPrompts.map((prompt, index) => (
+            <button
+              key={index}
+              onClick={() => handlePromptClick(prompt.text)}
+              className="text-main font-semibold text-lg bg-main bg-opacity-5 hover:bg-opacity-10 p-4 rounded-lg transition duration-200 ease-in-out shadow-md flex items-center justify-center space-x-3"
+            >
+              {prompt.icon}
+              <span>{prompt.text}</span>
+            </button>
+          ))}
         </div>
+      </div>
     </div>
   );
 };

@@ -11,16 +11,18 @@ const CurrentChat = ({
   isMessagesLoading,
   isStreaming,
   sendPrompt,
+  latestMessage,
   messages,
+  addMessage,
   waitingMessage
 }) => {
   const location = useLocation();
   const [prompt, setPrompt] = useState("");
   const [staticPrompt, setStaticPrompt] = useState("");
   const messageContainerRef = useRef(null); // Ref for the message container
+  const [scrollInterval, setScrollInterval] = useState(null)
 
 
-  
   const scrollToBottom = () => {
     const ele = document.getElementById("message-bottom");
     if (ele) {
@@ -50,6 +52,20 @@ const CurrentChat = ({
     });
   };
 
+  useEffect(() => {
+    if (isStreaming) {
+      setScrollInterval(setInterval(() => {
+        scrollToBottom()
+      }, 100))
+    }
+    else {
+      if (scrollInterval) {
+        clearInterval(scrollInterval)
+      }
+      scrollToBottom()
+    }
+  }, [isStreaming])
+
   return (
     <div className="h-full flex flex-col">
       <div id="messages" className="flex-1 overflow-auto md:p-3" ref={messageContainerRef}>
@@ -60,11 +76,13 @@ const CurrentChat = ({
         ) : (
           <Messages
             messages={messages}
+            latestMessage={latestMessage}
+            addMessage={addMessage}
             staticPrompt={staticPrompt}
             isLoading={isLoading}
             isStreaming={isStreaming}
-            scrollCallBack = {scrollToBottom}
-            waitingMessage = {waitingMessage}
+            scrollCallBack={scrollToBottom}
+            waitingMessage={waitingMessage}
           />
         )}
       </div>

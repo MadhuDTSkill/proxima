@@ -6,7 +6,7 @@ import { PiSpinnerGapBold } from "react-icons/pi";
 
 const Main = () => {
 
-  const {chat_id} = useParams()
+  const { chat_id } = useParams()
   const [chats, setChats] = React.useState({});
   const [isLoading, setIsLoading] = useState(false)
 
@@ -40,33 +40,33 @@ const Main = () => {
 
 
 
-  useEffect(()=>{
+  useEffect(() => {
     getChats()
-  },[chat_id])
+  }, [chat_id])
 
   return (
     <div className='flex-1 overflow-auto p-2'>
       {
         isLoading && chats.length === 0 ?
-        <div className='h-full flex justify-center items-center'>
-            <PiSpinnerGapBold size={20} className='text-main animate-spin'/>
-        </div>
-        :
-        Object.keys(chats).map((period) => (
-          <div key={period} className='mb-5'>
-            {
-              chats[period].length > 0 &&
-              <>
-                <h2 className='text-xs text-black font-bold mb-1'>{period}</h2>
-                <div className='flex flex-col'>
-                  {chats[period].map((chat, index) => (
-                    <ChatItem key={index} chat={chat} onDelete={deleteChat} />
-                  ))}
-                </div>
-              </>
-            }
+          <div className='h-full flex justify-center items-center'>
+            <PiSpinnerGapBold size={20} className='text-main animate-spin' />
           </div>
-        ))
+          :
+          Object.keys(chats).map((period) => (
+            <div key={period} className='mb-5'>
+              {
+                chats[period].length > 0 &&
+                <>
+                  <h2 className='text-xs text-black dark:text-white font-bold mb-3'>{period}</h2>
+                  <div className='flex flex-col'>
+                    {chats[period].map((chat, index) => (
+                      <ChatItem key={index} chat={chat} onDelete={deleteChat} />
+                    ))}
+                  </div>
+                </>
+              }
+            </div>
+          ))
       }
     </div>
   );

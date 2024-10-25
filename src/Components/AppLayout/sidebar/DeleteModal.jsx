@@ -6,7 +6,7 @@ const Modal = ({ isOpen, onClose, onConfirm }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-transparent">
-      <div className="bg-white p-6 rounded shadow-lg">
+      <div className="bg-white dark:bg-slate-800 p-6 rounded shadow-lg">
         <h2 className="text-lg font-bold mb-4">Delete Confirmation</h2>
         <p>Are you sure you want to delete this chat?</p>
         <div className="mt-4 flex justify-end">

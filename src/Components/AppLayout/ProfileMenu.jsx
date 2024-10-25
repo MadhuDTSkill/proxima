@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { FiSettings, FiLogOut } from 'react-icons/fi';
+import DarkModeToggle from '../../DarkModeToggle';
 
 const ProfileMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,7 +21,7 @@ const ProfileMenu = () => {
 
   const handleLogout = () => {
     // Clear all local storage
-    localStorage.clear();
+    localStorage.removeItem('accessToken');
     // Redirect to the sign-in page
     window.location.href = '/signin'; // Use your actual login route here
   };
@@ -42,11 +43,11 @@ const ProfileMenu = () => {
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-64 rounded-2xl shadow-lg bg-white border z-10">
-          <ul className="p-3">
+        <div className="flex sjustify-center absolute right-0 mt-2 w-48 rounded-2xl shadow-lg bg-white text-gray-800 dark:text-white dark:bg-slate-900 border dark:border-main z-10">
+          <ul className="p-3 w-full">
             {/* Settings Option */}
             <li
-              className="flex items-center p-2 rounded-lg hover:bg-gray-100 cursor-pointer"
+              className="flex items-center p-3 w-full rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800 cursor-pointer"
               onClick={handleSettingsRedirect} // Redirect to settings
             >
               <FiSettings className="mr-2" />
@@ -55,11 +56,14 @@ const ProfileMenu = () => {
 
             {/* Logout Option */}
             <li
-              className="flex items-center p-2 rounded-lg hover:bg-gray-100 cursor-pointer"
+              className="flex items-center p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800 cursor-pointer"
               onClick={handleLogout} // Logout and redirect
             >
               <FiLogOut className="mr-2" />
               <span>Logout</span>
+            </li>
+            <li>
+              <DarkModeToggle />
             </li>
           </ul>
         </div>

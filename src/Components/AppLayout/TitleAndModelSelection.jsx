@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FiChevronDown } from 'react-icons/fi'; 
+import { FiChevronDown } from 'react-icons/fi';
 import Title from '../../Title';
 import apiCallWithToken from '../../Functions/Axios';
 
@@ -39,10 +39,10 @@ const TitleAndModelSelection = () => {
     let body = {}
     let method = 'get'
     let loadingState = setIsLoading
-    const onSuccess = (data) =>{
+    const onSuccess = (data) => {
       setSelectedModel(data?.config?.model_id)
     }
-    const onFailure = (error) =>{
+    const onFailure = (error) => {
       console.log(error)
     }
     apiCallWithToken(url, body, method, loadingState, onSuccess, onFailure)
@@ -57,10 +57,10 @@ const TitleAndModelSelection = () => {
     }
     let method = 'post'
     let loadingState = setIsLoading
-    const onSuccess = (data) =>{
+    const onSuccess = (data) => {
       setSelectedModel(data?.config?.model_id)
     }
-    const onFailure = (error) =>{
+    const onFailure = (error) => {
       console.log(error)
     }
     apiCallWithToken(url, body, method, loadingState, onSuccess, onFailure)
@@ -68,7 +68,7 @@ const TitleAndModelSelection = () => {
 
   const handleModelSelect = (model_id) => {
     setSelectedModel(model_id);
-    setIsOpen(false); 
+    setIsOpen(false);
     setCurrentModel(model_id)
   };
 
@@ -84,9 +84,9 @@ const TitleAndModelSelection = () => {
     };
   }, [dropdownRef]);
 
-  useEffect(()=>{
+  useEffect(() => {
     getCurrentModel()
-  },[])
+  }, [])
 
   return (
     <div className="relative w-96" ref={dropdownRef}>
@@ -95,26 +95,26 @@ const TitleAndModelSelection = () => {
         className="flex items-center cursor-pointer rounded-lg"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <h1 className='text-main text-xl font-main font-bold flex items-center'><Title/></h1>
-        <h1 className="text-[10px] mx-2 mt-1 font-bold">{isLoading ? '...' : selectedModel}</h1>
+        <h1 className='text-main text-xl font-main font-bold flex items-center'><Title /></h1>
+        <h1 className="text-[10px] mx-2 mt-1 font-bold dark:text-white">{isLoading ? '...' : selectedModel}</h1>
         <FiChevronDown className="text-2xl text-main" />
       </div>
 
       {/* Dropdown menu */}
       {isOpen && (
-        <div className="absolute w-full border mt-2 rounded-2xl shadow-lg bg-white z-10 h-[350px] py-2 px-1">
+        <div className="absolute w-full border dark:border-main mt-2 rounded-2xl shadow-lg bg-white dark:bg-slate-900 z-10 h-[350px] py-2 px-1">
           <div className='h-full overflow-y-auto'>
             {Object.keys(models).map((category) => (
-              <div key={category} className="p-4 border-b">
-                <h2 className="font-bold text-xs text-black mb-2">{category}</h2>
+              <div key={category} className="p-4 border-b dark:border-main">
+                <h2 className="font-bold text-xs text-black dark:text-main mb-2">{category}</h2>
                 <div>
                   {models[category].map((model, index) => (
                     <h1
                       key={index}
-                      className={`flex justify-between items-center p-2 text-sm font-thin rounded-lg hover:bg-gray-100 cursor-pointer `}
+                      className={`flex justify-between items-center p-2 text-sm font-thin rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800 cursor-pointer `}
                       onClick={() => handleModelSelect(model.id)}
                     >
-                      <span>{model.title}</span>
+                      <span className='dark:text-white'>{model.title}</span>
                       {selectedModel === model.id && (
                         <span className="ml-2 text-xs bg-main text-white rounded-full px-2">
                           Active

@@ -4,7 +4,7 @@ const Title = ({
   flag
 }) => {
   return (
-    <span className={flag ? '' :'zero'}>Proxima</span>
+    <span className={flag ? '' : 'zero'}>Proxima</span>
   )
 }
 

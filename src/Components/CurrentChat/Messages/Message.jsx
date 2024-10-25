@@ -5,6 +5,7 @@ import MessageMenu from './MessageMenu'
 
 const Message = ({
   message,
+  addMessage,
   isLoading,
   isStreaming,
   streamingElementRef,
@@ -18,6 +19,7 @@ const Message = ({
         streamingElementRef = {streamingElementRef} 
         isLoading = {isLoading} 
         isStreaming = {isStreaming} 
+        addMessage = {addMessage}
         message={message} 
         waitingMessage = {waitingMessage}
       />

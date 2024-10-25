@@ -6,6 +6,8 @@ import { IoMdArrowDown } from 'react-icons/io';
 
 const Messages = ({
   messages,
+  addMessage,
+  latestMessage,
   staticPrompt,
   isLoading,
   isStreaming,
@@ -18,10 +20,6 @@ const Messages = ({
     threshold: 1,
   });
 
-  const latestMessageState = useSelector(
-    (state) => state.store.latestMessage
-  );
-
   return (
     <div className='relative'>
       <div className='flex flex-col gap-2 w-full'>
@@ -30,15 +28,16 @@ const Messages = ({
         ))}
         {isStreaming && (
           <Message
-            message={latestMessageState}
+            message={latestMessage}
             isStreaming={isStreaming}
+            addMessage={addMessage}
           />
         )}
         {isLoading && (
           <Message
             key='loading-message'
             isLoading={isLoading}
-            waitingMessage = {waitingMessage}
+            waitingMessage={waitingMessage}
             message={{
               id: 'loading',
               prompt: staticPrompt,
@@ -50,9 +49,8 @@ const Messages = ({
       {/* Scroll to bottom button */}
       <div
         onClick={scrollCallBack}
-        className={`${
-          !inView ? 'opacity-100' : 'opacity-0'
-        } sticky z-20 inset-x-0 bottom-0 flex justify-center transition-opacity duration-300 ease-in-out cp`}
+        className={`${!inView ? 'opacity-100' : 'opacity-0'
+          } sticky z-20 inset-x-0 bottom-0 flex justify-center transition-opacity duration-300 ease-in-out cp`}
       >
         <IoMdArrowDown className='bg-main p-1.5 text-white rounded-full' size={30} />
       </div>

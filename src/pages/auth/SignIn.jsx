@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import {ReactTyped} from 'react-typed'; // Correct import for Typed
+import { ReactTyped } from 'react-typed'; // Correct import for Typed
 import Title from '../../Title'
 import { apiCall } from '../../Functions/Axios';
-import { setData } from '../../Functions/LocalStorage';
 import { ImSpinner9 } from "react-icons/im";
+import { setData } from '../../Functions/localStorage';
 
 const Signin = () => {
   // State for form inputs
@@ -39,8 +39,8 @@ const Signin = () => {
   return (
     <div className="min-h-screen flex">
       {/* Left Side with Welcome Content */}
-      <div className="hidden md:flex w-1/2 flex-col justify-center items-center bg-gray-100 p-8">
-        <h1 className="text-4xl font-bold text-main mb-4">Welcome to <Title/></h1>
+      <div className="hidden md:flex w-1/2 flex-col justify-center items-center bg-gray-100 dark:bg-slate-900 p-8">
+        <h1 className="text-4xl font-bold text-main mb-4">Welcome to <Title /></h1>
         <ReactTyped
           strings={[
             'Engage with cutting-edge AI models.',
@@ -52,13 +52,13 @@ const Signin = () => {
           loop
           className="text-xl text-main"
         />
-        <p className="mt-6 text-gray-600">
+        <p className="mt-6 text-gray-600 dark:text-white">
           Step into a world of endless discussions with state-of-the-art AI. We're excited to have you!
         </p>
       </div>
 
       {/* Right Side with Sign-in Form */}
-      <div className="w-full md:w-1/2 flex justify-center items-center p-8">
+      <div className="w-full md:w-1/2 flex justify-center items-center p-8 dark:bg-slate-950">
         <div className="w-full max-w-md">
           <h2 className="text-3xl font-semibold text-center text-main mb-6">Sign In</h2>
 
@@ -73,7 +73,7 @@ const Signin = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-main"
+                className="w-full px-4 py-2 mt-2 border border-gray-300 dark:bg-slate-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-main"
                 placeholder="Enter your email"
               />
             </div>
@@ -87,7 +87,7 @@ const Signin = () => {
                 value={formData.password}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-main"
+                className="w-full px-4 py-2 mt-2 border border-gray-300 dark:bg-slate-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-main"
                 placeholder="Enter your password"
               />
             </div>
@@ -109,7 +109,7 @@ const Signin = () => {
 
           {/* Already have an account */}
           <div className="text-center">
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-600 dark:text-white">
               Don't have an account?
               <a href="/signup" className="text-main font-bold hover:underline ml-1">Sign Up</a>
             </p>

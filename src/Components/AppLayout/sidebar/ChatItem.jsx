@@ -45,12 +45,11 @@ const ChatItem = ({ chat, onDelete }) => {
   return (
     <>
       <div
-        className={`flex justify-between group items-center truncate py-2 px-2.5 rounded-lg cp ${
-          isActive ? 'bg-main bg-opacity-20' : 'hover:bg-pink-100'
-        }`}
+        className={`flex justify-between group items-center truncate py-2 px-2.5 rounded-lg cp ${isActive ? 'bg-main bg-opacity-20' : 'hover:bg-pink-100 dark:hover:bg-slate-800'
+          }`}
         onClick={handleNavigate}
       >
-        <span className='truncate text-black font-thin'>
+        <span className='truncate text-black dark:text-white font-thin'>
           {isNewChat ? (
             <ReactTyped
               strings={[chat.name || 'New Chat']}

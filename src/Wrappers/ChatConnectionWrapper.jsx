@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { getData } from '../Functions/localStorage'
 import apiCallWithToken from '../Functions/Axios';
-import { addNewMessage, addNewMessageChunk } from '../redux/Slice';
 
 
 const token = getData('accessToken')
@@ -19,6 +18,7 @@ const ChatConnectionWrapper = (WrappedComponent) => {
         const [isMessagesLoading, setIsMessagesLoading] = useState(true);
         const [isMessageCreateLoading, setIsMessageCreateLoading] = useState(false);
         const [isStreaming, setIsStreaming] = useState(false);
+        const [latestMessage, setLatestMessage] = useState(null);
         const [messages, setMessages] = useState([]);
 
 
@@ -35,24 +35,25 @@ const ChatConnectionWrapper = (WrappedComponent) => {
             let method = 'get'
             let loadingState = setIsMessagesLoading
             const onSuccess = (data) => {
-            setMessages(data)
+                setMessages(data)
             }
             const onError = (error) => {
                 console.log(error)
             }
             apiCallWithToken(url, body, method, loadingState, onSuccess, onError)
         };
-        
+
         const addMessage = (prompt, response) => {
             let url = `chat/${chat_id}/message/create-list/`
             let body = {
-                prompt : prompt,
-                chat : chat_id,
-                response : response
+                prompt: prompt,
+                chat: chat_id,
+                response: response
             }
             let method = 'post'
             let loadingState = setIsMessageCreateLoading
             const onSuccess = (data) => {
+                setLatestMessage(null)
                 setMessages(messages => ([...messages, data]))
                 setIsStreaming(false)
                 setWaitingMessage('Loading...')
@@ -74,24 +75,13 @@ const ChatConnectionWrapper = (WrappedComponent) => {
 
             ws.current.onmessage = (event) => {
                 const data = JSON.parse(event.data);
-                if (data.type === 'source_status'){
+                if (data.type === 'source_status') {
                     setWaitingMessage(data.source)
                 }
-                else{
-                    if (data.response === '<start>') {
-                        setIsStreaming(true)
-                        setIsLoading(false)
-                        dispatch(addNewMessage({
-                            ...data,
-                            response: ''
-                        }))
-                    }
-                    else if (data.response === '<end>') {
-                        addMessage(data?.prompt, data?.full_response)
-                    }
-                    else {
-                        dispatch(addNewMessageChunk(data.response))
-                    };
+                else if (data.type === 'response') {
+                    setIsLoading(false)
+                    setLatestMessage(data)
+                    setIsStreaming(true)
                 }
             }
 
@@ -126,12 +116,14 @@ const ChatConnectionWrapper = (WrappedComponent) => {
                 {...props}
                 isConnected={isConnected}
                 isLoading={isLoading}
-                isMessagesLoading = {isMessagesLoading}
+                isMessagesLoading={isMessagesLoading}
                 isMessageCreateLoading={isMessageCreateLoading}
                 isStreaming={isStreaming}
                 sendPrompt={sendPrompt}
-                messages = {messages}
-                waitingMessage = {waitingMessage}
+                latestMessage={latestMessage}
+                messages={messages}
+                addMessage={addMessage}
+                waitingMessage={waitingMessage}
             />
         )
     }
