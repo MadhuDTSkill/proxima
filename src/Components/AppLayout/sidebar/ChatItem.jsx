@@ -49,7 +49,7 @@ const ChatItem = ({ chat, onDelete }) => {
           }`}
         onClick={handleNavigate}
       >
-        <span className='truncate text-black dark:text-white font-thin'>
+        <span className='truncate text-black dark:text-slate-300 font-thin'>
           {isNewChat ? (
             <ReactTyped
               strings={[chat.name || 'New Chat']}

@@ -10,8 +10,8 @@ const Modal = ({ isOpen, onClose, onConfirm }) => {
         <h2 className="text-lg font-bold mb-4">Delete Confirmation</h2>
         <p>Are you sure you want to delete this chat?</p>
         <div className="mt-4 flex justify-end">
-          <button className="mr-2 px-4 py-2 text-white bg-gray-400 rounded" onClick={onClose}>Cancel</button>
-          <button className="px-4 py-2 bg-main text-white rounded" onClick={onConfirm}>Delete</button>
+          <button className="mr-2 px-4 py-2 text-black bg-gray-400 rounded" onClick={onClose}>Cancel</button>
+          <button className="px-4 py-2 bg-main text-slate-300 rounded" onClick={onConfirm}>Delete</button>
         </div>
       </div>
     </div>

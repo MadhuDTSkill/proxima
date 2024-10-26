@@ -96,7 +96,7 @@ const TitleAndModelSelection = () => {
         onClick={() => setIsOpen(!isOpen)}
       >
         <h1 className='text-main text-xl font-main font-bold flex items-center'><Title /></h1>
-        <h1 className="text-[10px] mx-2 mt-1 font-bold dark:text-white">{isLoading ? '...' : selectedModel}</h1>
+        <h1 className="text-[10px] mx-2 mt-1 font-bold dark:text-slate-300">{isLoading ? '...' : selectedModel}</h1>
         <FiChevronDown className="text-2xl text-main" />
       </div>
 
@@ -114,9 +114,9 @@ const TitleAndModelSelection = () => {
                       className={`flex justify-between items-center p-2 text-sm font-thin rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800 cursor-pointer `}
                       onClick={() => handleModelSelect(model.id)}
                     >
-                      <span className='dark:text-white'>{model.title}</span>
+                      <span className='dark:text-slate-300'>{model.title}</span>
                       {selectedModel === model.id && (
-                        <span className="ml-2 text-xs bg-main text-white rounded-full px-2">
+                        <span className="ml-2 text-xs bg-main text-slate-300 rounded-full px-2">
                           Active
                         </span>
                       )}

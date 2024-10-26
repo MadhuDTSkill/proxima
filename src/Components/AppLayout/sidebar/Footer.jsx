@@ -15,7 +15,7 @@ const Footer = () => {
       <div className='flex justify-between items-center'>
         {/* Site Name and Version */}
         <div>
-          <h1 className='font-bold text-[15px] text-main'><Title /> <span className='text-[9.5px] text-gray-500 dark:text-white'>v2.0.0</span></h1>
+          <h1 className='font-bold text-[15px] text-main'><Title /> <span className='text-[9.5px] text-gray-500 dark:text-slate-300'>v2.0.0</span></h1>
         </div>
 
         {/* Settings Icon */}

@@ -57,7 +57,7 @@ const Main = () => {
               {
                 chats[period].length > 0 &&
                 <>
-                  <h2 className='text-xs text-black dark:text-white font-bold mb-3'>{period}</h2>
+                  <h2 className='text-xs text-black dark:text-slate-300 font-bold mb-3'>{period}</h2>
                   <div className='flex flex-col'>
                     {chats[period].map((chat, index) => (
                       <ChatItem key={index} chat={chat} onDelete={deleteChat} />

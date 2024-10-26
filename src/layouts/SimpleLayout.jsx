@@ -7,11 +7,11 @@ const SimpleLayout = () => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
     return (
-        <div className='flex h-dvh bg-slate-100 font-main p-2 md:gap-1 lg:gap-2'>
+        <div className='flex h-dvh bg-slate-100 dark:bg-black font-main p-2 md:gap-1 lg:gap-2'>
             <div>
                 <SideBar isDrawerOpen={isDrawerOpen} setIsDrawerOpen={setIsDrawerOpen} />
             </div>
-            <div className='p-1 w-full flex flex-col h-full shadow-lg rounded-xl bg-white'>
+            <div className='p-1 w-full flex flex-col h-full shadow-lg rounded-xl bg-white dark:bg-gray-900'>
                 <div className='flex-1 overflow-y-auto'>
                     <Outlet />
                 </div>

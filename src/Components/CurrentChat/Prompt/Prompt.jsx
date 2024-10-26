@@ -175,10 +175,10 @@ const Prompt = ({ setStaticPrompt, setPrompt, prompt, onSubmit, isLoading, isStr
           {/* Right Icon */}
           <button
             type="submit"
-            className="absolute right-0 bg-main rounded-full p-2.5 m-1 text-white"
+            className="absolute right-0 bg-main rounded-full p-2.5 m-1 text-slate-300"
             disabled={prompt?.trim() === '' || isLoading || isUploadingFile || isStreaming}
           >
-            <FaPaperPlane className="text-white" size={20} />
+            <FaPaperPlane className="text-slate-300" size={20} />
           </button>
         </div>
       </form>

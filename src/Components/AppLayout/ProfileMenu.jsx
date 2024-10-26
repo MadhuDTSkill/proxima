@@ -35,7 +35,7 @@ const ProfileMenu = () => {
     <div className="relative" ref={menuRef}>
       {/* Profile Icon (Trigger) */}
       <div
-        className="w-8 h-8 rounded-full flex items-center justify-center text-white bg-main cursor-pointer"
+        className="w-8 h-8 rounded-full flex items-center justify-center text-slate-300 bg-main cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
       >
         M
@@ -43,7 +43,7 @@ const ProfileMenu = () => {
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className="flex sjustify-center absolute right-0 mt-2 w-48 rounded-2xl shadow-lg bg-white text-gray-800 dark:text-white dark:bg-slate-900 border dark:border-main z-10">
+        <div className="flex sjustify-center absolute right-0 mt-2 w-48 rounded-2xl shadow-lg bg-white text-gray-800 dark:text-slate-300 dark:bg-slate-900 border dark:border-main z-10">
           <ul className="p-3 w-full">
             {/* Settings Option */}
             <li

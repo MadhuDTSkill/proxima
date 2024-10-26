@@ -18,7 +18,7 @@ const Intro = ({ handlePromptClick }) => {
         <h1 className="text-5xl font-bold text-main mb-6"><Title /></h1>
 
         {/* Introductory text */}
-        <p className="text-xs text-gray-700 dark:text-white mb-8">
+        <p className="text-xs text-gray-700 dark:text-slate-300 mb-8">
           Welcome to <Title flag />! Here, you can chat with cutting-edge LLM models. Feel free to ask any question—from everyday curiosities to complex scientific inquiries—and get insightful responses in real-time. Start your conversation now or try one of the prompts below to explore interesting topics.
         </p>
 

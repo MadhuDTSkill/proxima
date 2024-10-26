@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { setIsNotesOpen } from '../../redux/Slice';
 
 const Notes = ({
-    isNotesOpen,
+  isNotesOpen,
 }) => {
 
   const dispatch = useDispatch()
@@ -18,12 +18,12 @@ const Notes = ({
 
   const editorModules = {
     toolbar: [
-      [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
-      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+      [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
+      [{ 'list': 'ordered' }, { 'list': 'bullet' }],
       ['bold', 'italic', 'underline', 'strike', 'blockquote'],
       [{ 'color': [] }, { 'background': [] }],
       ['link', 'image'],
-      ['clean']                                         
+      ['clean']
     ],
   };
 
@@ -38,20 +38,19 @@ const Notes = ({
   return (
     <>
       <div
-        className={`flex flex-col fixed top-0 right-0 h-full w-80 lg:w-96 text-sm bg-[#121418] transform transition-transform duration-300 z-10 ${
-          isNotesOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
+        className={`flex flex-col fixed top-0 right-0 h-full w-80 lg:w-96 text-sm bg-[#121418] transform transition-transform duration-300 z-10 ${isNotesOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
       >
         <div className="flex-0 p-2 text-[#F9801D]">
           <div onClick={setIsNotesOpenState} className='flex cp p-2 hover:bg-gray-900 rounded-lg justify-end items-center'>
-              <h1 className='text-main text-lg font-main font-extrabold'>Notes</h1>
+            <h1 className='text-main text-lg font-main font-extrabold'>Notes</h1>
           </div>
-          <p className='text-gray-700 flex'><MdNoteAlt className='mx-1' size={20}/> Capture, organize notes from responses, with rich text, customizable themes.</p>    
+          <p className='text-gray-700 flex'><MdNoteAlt className='mx-1' size={20} /> Capture, organize notes from responses, with rich text, customizable themes.</p>
         </div>
         <div className='p-2 flex-1 overflow-auto'>
-            <input name='title' type='text' className='w-full p-2 bg-transparent px-5 font-main border-none outline-none mb-2' placeholder='Title...'/>
-            <div className="">
-              {/* <ReactQuill
+          <input name='title' type='text' className='w-full p-2 bg-transparent px-5 font-main border-none outline-none mb-2' placeholder='Title...' />
+          <div className="">
+            {/* <ReactQuill
                 value={editorContent}
                 onChange={handleEditorChange}
                 modules={editorModules}
@@ -59,15 +58,15 @@ const Notes = ({
                 theme="snow"
                 className="text-[#F9801D] border-orange-500"
               /> */}
-            </div>
+          </div>
         </div>
         <div className='flex-0'>
           <div className='flex justify-end my-1 mx-3'>
-            <button onClick={setIsNotesOpenState} className='p-2 bg-transparent text-white rounded-full flex-shrink-0'>
+            <button onClick={setIsNotesOpenState} className='p-2 bg-transparent text-slate-300 rounded-full flex-shrink-0'>
               <h1 className='text-gray-700 text-md font-main font-extrabold'>Close</h1>
             </button>
-            <button className='p-2 bg-transparent text-white rounded-full flex-shrink-0'>
-              <h1 className='text-main text-md font-main font-extrabold flex i-c'><MdDownload size={20} className='icon-color'/> Download</h1>
+            <button className='p-2 bg-transparent text-slate-300 rounded-full flex-shrink-0'>
+              <h1 className='text-main text-md font-main font-extrabold flex i-c'><MdDownload size={20} className='icon-color' /> Download</h1>
             </button>
           </div>
         </div>

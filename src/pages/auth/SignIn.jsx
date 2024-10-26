@@ -52,7 +52,7 @@ const Signin = () => {
           loop
           className="text-xl text-main"
         />
-        <p className="mt-6 text-gray-600 dark:text-white">
+        <p className="mt-6 text-gray-600 dark:text-slate-300">
           Step into a world of endless discussions with state-of-the-art AI. We're excited to have you!
         </p>
       </div>
@@ -96,10 +96,10 @@ const Signin = () => {
             <div className="mb-4">
               <button
                 type="submit"
-                className="w-full bg-main text-white py-2 rounded-lg hover:bg-opacity-90 transition-colors"
+                className="w-full bg-main text-slate-300 py-2 rounded-lg hover:bg-opacity-90 transition-colors"
               >
                 {isLoading ? (
-                  <ImSpinner9 className="animate-spin text-white mx-auto" />
+                  <ImSpinner9 className="animate-spin text-slate-300 mx-auto" />
                 ) : (
                   'Sign In'
                 )}
@@ -109,7 +109,7 @@ const Signin = () => {
 
           {/* Already have an account */}
           <div className="text-center">
-            <p className="text-sm text-gray-600 dark:text-white">
+            <p className="text-sm text-gray-600 dark:text-slate-300">
               Don't have an account?
               <a href="/signup" className="text-main font-bold hover:underline ml-1">Sign Up</a>
             </p>

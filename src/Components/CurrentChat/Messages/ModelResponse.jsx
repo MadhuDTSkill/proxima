@@ -14,10 +14,10 @@ const ModelResponse = ({
     <div className=''>
       <h1 className='font-semibold text-main max-w-3xl text-lg mx-auto my-2'><Title /></h1>
       <div className='bg-main hover:bg-opacity-10 bg-opacity-5 p-2'>
-        <div className='text-black dark:text-white max-w-3xl mx-auto'>
+        <div className='text-black dark:text-slate-300 max-w-3xl mx-auto'>
           {
             isLoading ?
-              <div className='text-black dark:text-white max-w-3xl mx-auto'>
+              <div className='text-black dark:text-slate-300 max-w-3xl mx-auto'>
                 <div className='animate-pulse language-javascript dflex justify-center items-center text-main'>
                   {
                     waitingMessage?.split("").map((char, index) => (
@@ -26,7 +26,7 @@ const ModelResponse = ({
                         className="twinkle"
                         style={{ animationDelay: `${index * 0.1}s` }}
                       >
-                        {char}
+                        {char === ' ' ? '\u00A0' : char}
                       </span>
                     ))}
                 </div>
