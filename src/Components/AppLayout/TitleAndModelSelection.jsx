@@ -3,7 +3,9 @@ import { FiChevronDown } from 'react-icons/fi';
 import Title from '../../Title';
 import apiCallWithToken from '../../Functions/Axios';
 
-const TitleAndModelSelection = () => {
+const TitleAndModelSelection = ({
+  title
+}) => {
   const [selectedModel, setSelectedModel] = useState(""); // Initial model
   const [isLoading, setIsLoading] = useState(false); // Initial model
   const [isOpen, setIsOpen] = useState(false); // For controlling the dropdown
@@ -95,7 +97,7 @@ const TitleAndModelSelection = () => {
         className="flex items-center cursor-pointer rounded-lg"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <h1 className='text-main text-xl font-main font-bold flex items-center'><Title /></h1>
+        <h1 className='text-main text-xl font-main font-bold flex items-center'><Title title={title} /></h1>
         <h1 className="text-[10px] mx-2 mt-1 font-bold dark:text-slate-300">{isLoading ? '...' : selectedModel}</h1>
         <FiChevronDown className="text-2xl text-main" />
       </div>

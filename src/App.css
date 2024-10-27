@@ -11,7 +11,7 @@
 }
 
 *::-webkit-scrollbar-thumb {
-  @apply bg-gradient-to-t from-main to-main/70;
+  @apply bg-main;
 }
 
 .zero {
@@ -31,7 +31,7 @@ body {
 }
 
 .bg-main-hover {
-  @apply bg-gradient-to-t hover:from-orange-800 hover:to-orange-300;
+  @apply bg-gradient-to-t hover:from-main hover:to-main/50;
 }
 
 strong {
@@ -76,11 +76,11 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .bg-gradent {
-  @apply bg-gradient-to-b from-pink-500 to-pink-300 duration-300 transition;
+  @apply bg-gradient-to-b from-main to-main duration-300 transition;
 }
 
 .bg-gradent:hover {
-  @apply bg-gradient-to-t from-pink-500 to-pink-300 duration-300 transition !important;
+  @apply bg-gradient-to-t from-main to-main duration-300 transition !important;
 }
 
 .twinkle {

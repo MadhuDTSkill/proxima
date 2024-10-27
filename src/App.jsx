@@ -10,9 +10,12 @@ import CurrentChat from './pages/chat/CurrentChat';
 import SignUp from './pages/auth/SignUp';
 import SignIn from './pages/auth/SignIn';
 import AppLayout from './layouts/AppLayout';
+import CustomGPTLayout from './layouts/CustomGPTLayout';
 import NotFound from './pages/extra/NotFound';
 import RootLayout from './layouts/RootLayout';
 import CustomGPTs from './pages/chat/CustomGPTs';
+import NewCustomGPTChat from './pages/chat/NewCustomGPTChat';
+import CurrentCustomGPTChat from './pages/chat/CurrentCustomGPTChat';
 import CustomMlModels from './pages/chat/CustomMlModels';
 import SimpleLayout from './layouts/SimpleLayout';
 import DarkModeToggle from './DarkModeToggle';
@@ -42,6 +45,26 @@ const router = createBrowserRouter([
       {
         path: '/c/:chat_id',
         Component: CurrentChat,
+      },
+    ]
+  },
+  {
+    path: '/',
+    Component: AuthWrapper(CustomGPTLayout),
+    children: [
+      {
+        path: '/g/:gpt_slug',
+        Component: NewCustomGPTChat,
+        children: [
+          {
+            index: true,
+            Component: NewCustomGPTChat
+          },
+          {
+            path: 'c/:gpt_id',
+            Component: CurrentCustomGPTChat,
+          },
+        ]
       },
     ]
   },

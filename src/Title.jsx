@@ -1,10 +1,11 @@
 import React from 'react'
 
 const Title = ({
-  flag
+  flag,
+  title
 }) => {
   return (
-    <span className={flag ? '' : 'zero'}>Proxima</span>
+    <span className={flag ? '' : 'zero'}>{title ? title : 'Proxima'}</span>
   )
 }
 

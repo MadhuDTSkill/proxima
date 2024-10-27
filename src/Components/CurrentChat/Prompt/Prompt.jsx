@@ -10,7 +10,7 @@ import { useParams } from 'react-router-dom';
 
 const Prompt = ({ setStaticPrompt, setPrompt, prompt, onSubmit, isLoading, isStreaming }) => {
   const [rows, setRows] = useState(1);
-  const { chat_id } = useParams()
+  const { chat_id, gpt_slug } = useParams()
   const [uploadedFile, setUploadedFile] = useState(null);
   const [isUploadingFile, setIsUploadedingFile] = useState(null);
   const fileInputRef = useRef(null); // Create a reference for the file input
@@ -146,7 +146,7 @@ const Prompt = ({ setStaticPrompt, setPrompt, prompt, onSubmit, isLoading, isStr
         <div className="relative flex items-center">
           {/* Left Icon */}
           {
-            chat_id &&
+            chat_id && !gpt_slug &&
             <label htmlFor="attachment" className="absolute left-3 cp">
               <RiAttachmentLine className="text-main" size={25} />
             </label>
@@ -166,7 +166,7 @@ const Prompt = ({ setStaticPrompt, setPrompt, prompt, onSubmit, isLoading, isStr
             onChange={handleTextChange}
             onKeyDown={handleKeyDown}
             rows={rows}
-            placeholder="Message to Proxima..."
+            placeholder="Type message ..."
             maxLength={8000}
             className={`pl-12 pr-12 ${rows > 2 ? 'rounded-2xl' : 'rounded-full'}  shadow-md shadow-gray-400 dark:shadow-main dark:border-main p-3 border-t w-full bg-transparent outline-none`}
             style={{ resize: 'none', overflow: 'hidden' }}
@@ -181,11 +181,11 @@ const Prompt = ({ setStaticPrompt, setPrompt, prompt, onSubmit, isLoading, isStr
             <FaPaperPlane className="text-slate-300" size={20} />
           </button>
         </div>
-      </form>
+      </form >
       <div className="">
         <Footer />
       </div>
-    </div>
+    </div >
   );
 };
 
