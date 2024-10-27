@@ -2,6 +2,7 @@ import React from 'react'
 import Title from '../../../Title'
 import Markdown from 'react-markdown'
 import WordTypewriter from '../../AppLayout/Typing'
+import { MdErrorOutline } from "react-icons/md";
 
 const ModelResponse = ({
   message,
@@ -9,6 +10,7 @@ const ModelResponse = ({
   isStreaming,
   addMessage,
   waitingMessage = 'Loading...',
+  error
 }) => {
   return (
     <div className=''>
@@ -42,11 +44,19 @@ const ModelResponse = ({
                   />
                 </div>
                 :
-                <div>
-                  <Markdown >
-                    {message.response}
-                  </Markdown>
-                </div>
+                error ?
+                  <div className='bg-red-400/20 flex items-stretch  gap-2 p-2 rounded-lg'>
+                    <MdErrorOutline size={50} className='text-red-500' />
+                    <Markdown >
+                      {message.response}
+                    </Markdown>
+                  </div>
+                  :
+                  <div>
+                    <Markdown >
+                      {message.response}
+                    </Markdown>
+                  </div>
           }
         </div>
       </div>

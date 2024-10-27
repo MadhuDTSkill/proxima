@@ -1,6 +1,5 @@
 import React from 'react';
 import Message from './Message';
-import { useSelector } from 'react-redux';
 import { useInView } from 'react-intersection-observer';
 import { IoMdArrowDown } from 'react-icons/io';
 
@@ -8,6 +7,7 @@ const Messages = ({
   messages,
   addMessage,
   latestMessage,
+  errorMessage,
   staticPrompt,
   isLoading,
   isStreaming,
@@ -24,8 +24,17 @@ const Messages = ({
     <div className='relative'>
       <div className='flex flex-col gap-2 w-full'>
         {messages.map((message) => (
-          <Message key={message.id} message={message} showMenu />
+          <Message key={message.id} message={message} errorMessage={errorMessage} showMenu />
         ))}
+        {
+          errorMessage && (
+            <Message
+              message={{ prompt: staticPrompt, response: errorMessage }}
+              showMenu
+              error
+            />
+          )
+        }
         {isStreaming && (
           <Message
             message={latestMessage}

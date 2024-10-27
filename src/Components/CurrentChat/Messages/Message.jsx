@@ -10,25 +10,27 @@ const Message = ({
   isStreaming,
   streamingElementRef,
   waitingMessage,
-  showMenu
+  showMenu,
+  error
 }) => {
   return (
     <div>
       <UserMessage message={message} />
-      <ModelResponse 
-        streamingElementRef = {streamingElementRef} 
-        isLoading = {isLoading} 
-        isStreaming = {isStreaming} 
-        addMessage = {addMessage}
-        message={message} 
-        waitingMessage = {waitingMessage}
+      <ModelResponse
+        streamingElementRef={streamingElementRef}
+        isLoading={isLoading}
+        isStreaming={isStreaming}
+        addMessage={addMessage}
+        message={message}
+        waitingMessage={waitingMessage}
+        error={error}
       />
       <div className='h-10 max-w-3xl mx-auto py-2'>
         {
           showMenu && (
-          <div className='duration-300 transition'>
-            <MessageMenu message={message.response} />
-          </div>
+            <div className='duration-300 transition'>
+              <MessageMenu message={message.response} />
+            </div>
           )
         }
       </div>

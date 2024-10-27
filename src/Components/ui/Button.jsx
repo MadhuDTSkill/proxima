@@ -14,7 +14,7 @@ const Button = ({ children = 'Button', className = '', extraClassName = '', href
             className={
                 className
                     ? className
-                    : 'm-1 p-2 px-5 rounded-lg font-semibold bg-gradent text-slate-300' +
+                    : 'm-1 p-2 px-5 rounded-3xl font-semibold bg-gradent text-slate-100' +
                     ' ' + extraClassName || ''
             }
             onClick={handleRouterClick}

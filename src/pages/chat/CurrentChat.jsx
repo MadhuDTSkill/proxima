@@ -4,11 +4,14 @@ import Messages from "../../Components/CurrentChat/Messages/Messages";
 import Prompt from "../../Components/CurrentChat/Prompt/Prompt";
 import { useLocation } from "react-router-dom";
 import { PiSpinnerGap } from "react-icons/pi";
+import Reconnect from "../../Components/CurrentChat/Reconnect";
 
 const CurrentChat = ({
   isConnected,
+  isConnecting,
   isLoading,
   isMessagesLoading,
+  errorMessage,
   isStreaming,
   sendPrompt,
   latestMessage,
@@ -34,7 +37,7 @@ const CurrentChat = ({
   // Scroll to bottom when messages load or change
   useEffect(() => {
     scrollToBottom();
-  }, [messages, isLoading]);
+  }, [messages, isLoading, errorMessage]);
 
   // Handling initial prompt from location state
   useEffect(() => {
@@ -77,6 +80,7 @@ const CurrentChat = ({
           <Messages
             messages={messages}
             latestMessage={latestMessage}
+            errorMessage={errorMessage}
             addMessage={addMessage}
             staticPrompt={staticPrompt}
             isLoading={isLoading}
@@ -98,7 +102,7 @@ const CurrentChat = ({
               setStaticPrompt={setStaticPrompt}
             />
           ) : (
-            ""
+            <Reconnect onReconnect={() => window.location.reload()} isConnecting={isConnecting} />
           )}
         </div>
       </div>

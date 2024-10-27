@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { FaPaperPlane, FaFileImage, FaFileAlt, FaFilePdf, FaFileWord } from 'react-icons/fa';
 import { RiAttachmentLine } from "react-icons/ri";
-import { IoMdCloseCircle } from 'react-icons/io';
+import { IoMdCloseCircle, IoMdSend } from 'react-icons/io';
 import { CiMicrophoneOn } from "react-icons/ci";
 import { IoStopCircleOutline } from "react-icons/io5";
 import Footer from '../../AppLayout/Footer';
@@ -146,8 +146,7 @@ const Prompt = ({ setStaticPrompt, setPrompt, prompt, onSubmit, isLoading, isStr
         <div className="relative flex items-center">
           {/* Left Icon */}
           {
-            chat_id && !gpt_slug &&
-            <label htmlFor="attachment" className="absolute left-3 cp">
+            <label disabled htmlFor={chat_id && !gpt_slug && "attachment"} className="absolute left-3 cp">
               <RiAttachmentLine className="text-main" size={25} />
             </label>
           }
@@ -175,10 +174,10 @@ const Prompt = ({ setStaticPrompt, setPrompt, prompt, onSubmit, isLoading, isStr
           {/* Right Icon */}
           <button
             type="submit"
-            className="absolute right-0 bg-main rounded-full p-2.5 m-1 text-slate-300"
+            className="absolute right-0 sbg-main rounded-full p-2.5 m-1 text-main"
             disabled={prompt?.trim() === '' || isLoading || isUploadingFile || isStreaming}
           >
-            <FaPaperPlane className="text-slate-300" size={20} />
+            <IoMdSend size={25} />
           </button>
         </div>
       </form >

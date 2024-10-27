@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { getData } from '../Functions/localStorage'
 import apiCallWithToken from '../Functions/Axios';
@@ -6,17 +7,16 @@ import apiCallWithToken from '../Functions/Axios';
 
 const token = getData('accessToken')
 
-const ChatConnectionWrapper = (WrappedComponent) => {
+const CustomGPTChatConnectionWrapper = (WrappedComponent) => {
     return (props) => {
         const ws = useRef(null);
         const { chat_id } = useParams()
+        const dispatch = useDispatch()
         const [isConnected, setIsConnected] = useState(false);
-        const [isConnecting, setIsConnecting] = useState(false);
         const [isLoading, setIsLoading] = useState(false);
         const [waitingMessage, setWaitingMessage] = useState('Loading...');
         const [isMessagesLoading, setIsMessagesLoading] = useState(true);
         const [isMessageCreateLoading, setIsMessageCreateLoading] = useState(false);
-        const [errorMessage, setErrorMessage] = useState('');
         const [isStreaming, setIsStreaming] = useState(false);
         const [latestMessage, setLatestMessage] = useState(null);
         const [messages, setMessages] = useState([]);
@@ -65,13 +65,11 @@ const ChatConnectionWrapper = (WrappedComponent) => {
         };
 
         const setupWebSocket = () => {
-            setIsConnecting(true)
             ws.current = ws.current || new WebSocket(`ws://127.0.0.1:1234/ws/chat/${chat_id}?token=${token}`);
 
             ws.current.onopen = () => {
                 console.log("WebSocket connected!");
-                setErrorMessage('')
-                setIsConnecting(false)
+                getMessages()
                 setIsConnected(true);
             };
 
@@ -89,17 +87,15 @@ const ChatConnectionWrapper = (WrappedComponent) => {
 
             ws.current.onerror = (event) => {
                 console.error("WebSocket error observed:", event);
-                setErrorMessage('An error occurred. Either the engine you requested does not exist or there was another issue processing your request. If this issue persists please contact us through our help center at help.openai.com.')
                 setIsConnected(false);
-                setIsConnecting(false)
+                setIsMessagesLoading(true)
 
             };
 
             ws.current.onclose = (event) => {
                 console.log(`WebSocket is closed now`);
-                setErrorMessage('An error occurred. Either the engine you requested does not exist or there was another issue processing your request. If this issue persists please contact us through our help center at help.openai.com.')
                 setIsConnected(false);
-                setIsConnecting(false)
+                setIsMessagesLoading(true)
             };
         };
 
@@ -109,24 +105,19 @@ const ChatConnectionWrapper = (WrappedComponent) => {
                 if (ws.current.readyState === WebSocket.OPEN) {
                     ws.current.close();
                     ws.current = null
+                    setIsMessagesLoading(true)
                     setIsConnected(false);
                 }
             };
-        }, [chat_id]);
-
-        useEffect(() => {
-            getMessages();
         }, [chat_id]);
 
         return (
             <WrappedComponent
                 {...props}
                 isConnected={isConnected}
-                isConnecting={isConnecting}
                 isLoading={isLoading}
                 isMessagesLoading={isMessagesLoading}
                 isMessageCreateLoading={isMessageCreateLoading}
-                errorMessage={errorMessage}
                 isStreaming={isStreaming}
                 sendPrompt={sendPrompt}
                 latestMessage={latestMessage}
@@ -138,5 +129,5 @@ const ChatConnectionWrapper = (WrappedComponent) => {
     }
 }
 
-export default ChatConnectionWrapper
+export default CustomGPTChatConnectionWrapper
 
